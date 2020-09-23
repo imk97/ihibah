@@ -93,7 +93,8 @@ class DividenController extends Controller
             $insert = DB::table('dividens')->insert([$validate]);
 
             if ($insert == true) {
-                if (view()->exists('main')) {
+                if (view()->exists('home')) {
+                    $request->session()->flash('status', 'Data berjaya disimpan!');
                     return redirect()->action('DividenController@index');
                 } else {
                     abort(404);
@@ -196,6 +197,7 @@ class DividenController extends Controller
 
             if($update == true) {
                 if (view()->exists('main')) {
+                    $request->session()->flash('status', 'Data berjaya diubah!');
                     return redirect()->action('DividenController@index');
                 } else {
                     abort(404);
@@ -216,12 +218,13 @@ class DividenController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
         if (Auth::check()) {
             $del = DB::table('dividens')->where('id',$id)->delete();
             if ($del == true) {
                 if (view()->exists('home')) {
+                    $request->session()->flash('delete', 'Data berjaya dipadam!');
                     return redirect()->route('home');
                 } else {
                     abort(404);

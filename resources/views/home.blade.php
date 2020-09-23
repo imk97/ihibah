@@ -3,6 +3,22 @@
 @section('content')
 @extends('modalpdf')
 <div class="container">
+    @if (Session::has('status'))
+        <div class="alert alert-success text-center">
+            {{ Session::get('status') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @elseif (Session::has('delete'))
+        <div class="alert alert-danger text-center">
+            {{ Session::get('delete') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true"></span>
+            </button>
+        </div>
+    @else
+    @endif
     <div class="row justify-content-center">
         <div class="col">
             <div class="table-responsive">
@@ -61,7 +77,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6 text-center" >
             <h5><strong>Form</strong></h5>
-            <h2>Maklumat Dividen</h2>
+            <h2>Maklumat IHibah</h2>
             <hr>
         </div>
     </div>
